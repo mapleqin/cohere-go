@@ -3141,7 +3141,7 @@ func (c *ChatToolCallDeltaEventDelta) String() string {
 }
 
 type ChatToolCallDeltaEventDeltaMessage struct {
-	ToolCall *ChatToolCallDeltaEventDeltaToolCall `json:"tool_calls,omitempty" url:"tool_calls,omitempty"`
+	ToolCalls *ChatToolCallDeltaEventDeltaToolCall `json:"tool_calls,omitempty" url:"tool_calls,omitempty"`
 
 	extraProperties map[string]interface{}
 	_rawJSON        json.RawMessage
@@ -3390,7 +3390,7 @@ func (c *ChatToolCallStartEventDelta) String() string {
 }
 
 type ChatToolCallStartEventDeltaMessage struct {
-	ToolCall *ChatToolCallStartEventDeltaToolCall `json:"tool_calls,omitempty" url:"tool_calls,omitempty"`
+	ToolCalls *ChatToolCallStartEventDeltaToolCall `json:"tool_calls,omitempty" url:"tool_calls,omitempty"`
 
 	extraProperties map[string]interface{}
 	_rawJSON        json.RawMessage
