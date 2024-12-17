@@ -5,8 +5,9 @@ package api
 import (
 	json "encoding/json"
 	fmt "fmt"
-	core "github.com/cohere-ai/cohere-go/v2/core"
 	time "time"
+
+	core "github.com/cohere-ai/cohere-go/v2/core"
 )
 
 type ChatRequest struct {
@@ -3099,7 +3100,7 @@ func (c *ChatToolCallDeltaEvent) String() string {
 }
 
 type ChatToolCallDeltaEventDelta struct {
-	ToolCall *ChatToolCallDeltaEventDeltaToolCall `json:"tool_call,omitempty" url:"tool_call,omitempty"`
+	Message *ChatToolCallDeltaEventDeltaMessage `json:"message,omitempty" url:"message,omitempty"`
 
 	extraProperties map[string]interface{}
 	_rawJSON        json.RawMessage
@@ -3128,6 +3129,47 @@ func (c *ChatToolCallDeltaEventDelta) UnmarshalJSON(data []byte) error {
 }
 
 func (c *ChatToolCallDeltaEventDelta) String() string {
+	if len(c._rawJSON) > 0 {
+		if value, err := core.StringifyJSON(c._rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := core.StringifyJSON(c); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", c)
+}
+
+type ChatToolCallDeltaEventDeltaMessage struct {
+	ToolCall *ChatToolCallDeltaEventDeltaToolCall `json:"tool_calls,omitempty" url:"tool_calls,omitempty"`
+
+	extraProperties map[string]interface{}
+	_rawJSON        json.RawMessage
+}
+
+func (c *ChatToolCallDeltaEventDeltaMessage) GetExtraProperties() map[string]interface{} {
+	return c.extraProperties
+}
+
+func (c *ChatToolCallDeltaEventDeltaMessage) UnmarshalJSON(data []byte) error {
+	type unmarshaler ChatToolCallDeltaEventDeltaMessage
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*c = ChatToolCallDeltaEventDeltaMessage(value)
+
+	extraProperties, err := core.ExtractExtraProperties(data, *c)
+	if err != nil {
+		return err
+	}
+	c.extraProperties = extraProperties
+
+	c._rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (c *ChatToolCallDeltaEventDeltaMessage) String() string {
 	if len(c._rawJSON) > 0 {
 		if value, err := core.StringifyJSON(c._rawJSON); err == nil {
 			return value
@@ -3307,7 +3349,7 @@ func (c *ChatToolCallStartEvent) String() string {
 }
 
 type ChatToolCallStartEventDelta struct {
-	ToolCall *ChatToolCallStartEventDeltaToolCall `json:"tool_call,omitempty" url:"tool_call,omitempty"`
+	Message *ChatToolCallStartEventDeltaMessage `json:"message,omitempty" url:"message,omitempty"`
 
 	extraProperties map[string]interface{}
 	_rawJSON        json.RawMessage
@@ -3336,6 +3378,47 @@ func (c *ChatToolCallStartEventDelta) UnmarshalJSON(data []byte) error {
 }
 
 func (c *ChatToolCallStartEventDelta) String() string {
+	if len(c._rawJSON) > 0 {
+		if value, err := core.StringifyJSON(c._rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := core.StringifyJSON(c); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", c)
+}
+
+type ChatToolCallStartEventDeltaMessage struct {
+	ToolCall *ChatToolCallStartEventDeltaToolCall `json:"tool_calls,omitempty" url:"tool_calls,omitempty"`
+
+	extraProperties map[string]interface{}
+	_rawJSON        json.RawMessage
+}
+
+func (c *ChatToolCallStartEventDeltaMessage) GetExtraProperties() map[string]interface{} {
+	return c.extraProperties
+}
+
+func (c *ChatToolCallStartEventDeltaMessage) UnmarshalJSON(data []byte) error {
+	type unmarshaler ChatToolCallStartEventDeltaMessage
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*c = ChatToolCallStartEventDeltaMessage(value)
+
+	extraProperties, err := core.ExtractExtraProperties(data, *c)
+	if err != nil {
+		return err
+	}
+	c.extraProperties = extraProperties
+
+	c._rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (c *ChatToolCallStartEventDeltaMessage) String() string {
 	if len(c._rawJSON) > 0 {
 		if value, err := core.StringifyJSON(c._rawJSON); err == nil {
 			return value
